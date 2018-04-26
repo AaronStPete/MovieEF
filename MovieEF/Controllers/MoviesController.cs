@@ -40,7 +40,27 @@ namespace MovieEF.Controllers
 
         //GET: api/Movies/Search?title=Jurassic
         [HttpGet, Route("API/Movies/Search")]
-        ///TODO
+        public IHttpActionResult GetMovieByTitle(string title)
+        {
+            var movies = db.Movies.Where(w => w.Title.ToLower().Contains(title.ToLower()));
+            if (title == null)
+            {
+                return NotFound();
+            }
+            return Ok(movies);
+        }
+
+        //GET: api/Movies/Search?Genre=Testing
+        [HttpGet, Route("API/Movies/Search")]
+        public IHttpActionResult GetMovieByGenre(string genre)
+        {
+            var movies = db.Movies.Where(w => w.Genre.ToLower().Contains(genre.ToLower()));
+            if (genre == null)
+            {
+                return NotFound();
+            }
+            return Ok(movies);
+        }
 
 
         // PUT: api/Movies/5
