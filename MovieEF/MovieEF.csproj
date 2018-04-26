@@ -188,6 +188,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804260013035_addingMoviesContext.cs" />
+    <Compile Include="Migrations\201804260013035_addingMoviesContext.Designer.cs">
+      <DependentUpon>201804260013035_addingMoviesContext.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804260015577_RatingisNullable.cs" />
+    <Compile Include="Migrations\201804260015577_RatingisNullable.Designer.cs">
+      <DependentUpon>201804260015577_RatingisNullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="MovieContext\MoviesContext.cs" />
@@ -260,6 +268,14 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201804260013035_addingMoviesContext.resx">
+      <DependentUpon>201804260013035_addingMoviesContext.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804260015577_RatingisNullable.resx">
+      <DependentUpon>201804260015577_RatingisNullable.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
