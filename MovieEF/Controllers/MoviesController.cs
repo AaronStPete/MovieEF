@@ -78,9 +78,15 @@ namespace MovieEF.Controllers
 
         [HttpPost]
         [Route("API/Movies")]
-        public IHttpActionResult AddMovie (Movie movie)
+        public IHttpActionResult AddMovie([FromBody]Movie movie)
         {
-
+            using (var db = new MoviesContext())
+            {
+                var movieQuery = db.Movies;
+                movieQuery.Add(movie);
+                var response = movie;
+                return Ok(response);
+            }
         }
 
 

@@ -12,6 +12,5 @@ namespace MovieEF.ViewModels
         public string Tagline { get; set; } = "";
         public int? Rating { get; set; }
         public string Genre { get; set; }
-
     }
 }
