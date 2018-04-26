@@ -24,9 +24,9 @@ namespace MovieEF.Controllers
             return db.Movies;
         }
 
-        [HttpGet, Route("API/Movies/Search")]
 
-        // GET: api/Movies/5
+        // GET: api/Movies/Search?id=5
+        [HttpGet, Route("API/Movies/Search")]
         [ResponseType(typeof(Movie))]
         public IHttpActionResult GetMovie(int id)
         {
@@ -35,13 +35,17 @@ namespace MovieEF.Controllers
             {
                 return NotFound();
             }
-
             return Ok(movie);
         }
 
+        //GET: api/Movies/Search?title=Jurassic
+        [HttpGet, Route("API/Movies/Search")]
+        ///TODO
+
+
         // PUT: api/Movies/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutMovie(int id, Movie movie)
+        [ResponseType(typeof(Movie))]
+        public IHttpActionResult PutMovie([FromUri]int id, [FromBody]Movie movie)
         {
             if (!ModelState.IsValid)
             {
@@ -71,7 +75,7 @@ namespace MovieEF.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(movie);
         }
 
         // POST: api/Movies
@@ -84,28 +88,38 @@ namespace MovieEF.Controllers
             {
                 var movieQuery = db.Movies;
                 movieQuery.Add(movie);
+                db.SaveChanges();
                 var response = movie;
                 return Ok(response);
             }
         }
 
+        //JSON EXAMPLE
+    //    {
+    //    "Title": "Jurassic Park",
+    //    "YearReleased": "1993-01-01T00:00:00",
+    //    "Tagline": "Scary Dinos",
+    //    "Rating": 10,
+    //    "Genre": "Fantasy/Science fiction"
+    //}
 
-        //[ResponseType(typeof(Movie))]
-        //public IHttpActionResult PostMovie(Movie movie)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
 
-        //    db.Movies.Add(movie);
-        //    db.SaveChanges();
+    //[ResponseType(typeof(Movie))]
+    //public IHttpActionResult PostMovie(Movie movie)
+    //{
+    //    if (!ModelState.IsValid)
+    //    {
+    //        return BadRequest(ModelState);
+    //    }
 
-        //    return CreatedAtRoute("DefaultApi", new { id = movie.Id }, movie);
-        //}
+    //    db.Movies.Add(movie);
+    //    db.SaveChanges();
 
-        // DELETE: api/Movies/5
-        [ResponseType(typeof(Movie))]
+    //    return CreatedAtRoute("DefaultApi", new { id = movie.Id }, movie);
+    //}
+
+    // DELETE: api/Movies/5
+    [ResponseType(typeof(Movie))]
         public IHttpActionResult DeleteMovie(int id)
         {
             Movie movie = db.Movies.Find(id);
